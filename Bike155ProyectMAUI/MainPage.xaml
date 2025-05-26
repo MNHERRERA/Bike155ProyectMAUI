@@ -8,13 +8,15 @@
     <VerticalStackLayout Spacing="20">
 
         <!-- Título -->
-        <Label Text="BIKE155 - Gestión de Bicicletas"
-               FontSize="24"
-               HorizontalOptions="Center"
-               TextColor="White"
-               BackgroundColor="#7774E8"
-               Padding="10"
-               CornerRadius="10"/>
+        <Frame BackgroundColor="#7774E8"
+       CornerRadius="10"
+       Padding="10">
+            <Label Text="TÍTULO de la app"
+           FontSize="24"
+           HorizontalOptions="Center"
+           TextColor="White"/>
+        </Frame>
+
 
         <!-- Botón Registrar usuario -->
         <Button Text="Registrar usuario"
