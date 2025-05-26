@@ -13,14 +13,14 @@ public partial class MainPage : ContentPage
 
         _httpClient = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7170/") // Cambia al puerto de tu backend
+            BaseAddress = new Uri("https://localhost:7170/") // Ajusta al puerto real de tu backend
         };
 
-        LoadRutas();
+        _ = LoadRutas(); // Llamada inicial para cargar rutas
     }
 
     // Obtener lista de rutas (GET)
-    private async void LoadRutas()
+    private async Task LoadRutas()
     {
         try
         {
@@ -33,44 +33,31 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // Crear una ruta nueva (POST)
-    private async void OnCrearRutaClicked(object sender, EventArgs e)
+    // Método público para recargar rutas (llamado desde otras páginas)
+    public async Task RecargarRutasAsync()
     {
-        try
-        {
-            // Ejemplo de datos para la nueva ruta
-            var nuevaRuta = new Ruta
-            {
-                Nombre = $"Ruta creada en {DateTime.Now}"
-            };
-
-            var response = await _httpClient.PostAsJsonAsync("api/Rutas", nuevaRuta);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Éxito", "Ruta creada correctamente", "OK");
-                LoadRutas(); // Recargar la lista
-            }
-            else
-            {
-                await DisplayAlert("Error", $"Código: {response.StatusCode}", "OK");
-            }
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", ex.Message, "OK");
-        }
+        await LoadRutas();
     }
 
+    // Ir a la página para crear ruta
+    private async void OnCrearRutaClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CrearRutaPage());
+    }
+
+    // Registrar usuario (opcional)
     private async void OnRegistrarUsuarioClicked(object sender, EventArgs e)
     {
         await DisplayAlert("Acción", "Aquí irá la lógica para registrar usuario.", "OK");
     }
 }
 
-// Modelo de Ruta
+// Modelo de Ruta (debe coincidir con la respuesta del backend)
 public class Ruta
 {
     public int Id { get; set; }
-    public string Nombre { get; set; }
+    public string Ubicacion { get; set; }
+    public DateTime Fecha { get; set; }
+    public int UserId { get; set; }
+    public int BikeId { get; set; }
 }
