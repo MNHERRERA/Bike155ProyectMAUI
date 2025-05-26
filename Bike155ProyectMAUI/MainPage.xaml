@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bike155ProyectMAUI.MainPage"
+             BackgroundColor="#CFC1E8"
+             Padding="20">
+
+    <VerticalStackLayout Spacing="20">
+
+        <!-- Título -->
+        <Label Text="BIKE155 - Gestión de Bicicletas"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="White"
+               BackgroundColor="#7774E8"
+               Padding="10"
+               CornerRadius="10"/>
+
+        <!-- Botón Registrar usuario -->
+        <Button Text="Registrar usuario"
+                BackgroundColor="#C374E8"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnRegistrarUsuarioClicked"/>
+
+        <!-- Botón Crear rutas -->
+        <Button Text="Crear rutas"
+                BackgroundColor="#9D74E8"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnCrearRutaClicked"/>
+
+        <!-- Lista de rutas -->
+        <Frame BackgroundColor="#7496E8"
+               BorderColor="Black"
+               CornerRadius="10"
+               Padding="10"
+               HasShadow="True">
+            <VerticalStackLayout>
+                <Label Text="Lista de rutas"
+                       TextColor="White"
+                       FontSize="18"
+                       HorizontalOptions="Center"/>
+                <CollectionView x:Name="RutasCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Nombre}"
+                                   TextColor="White"
+                                   FontSize="16"
+                                   Padding="5"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>
